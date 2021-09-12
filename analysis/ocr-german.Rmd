@@ -1,0 +1,36 @@
+---
+title: "Sample Text Extraction"
+author: "Mohammed Faizan"
+date: "11/09/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(pdftools)
+library(tesseract)
+library(magick)
+```
+
+# Extracting text from German manuscripts
+
+```{r}
+germanFraktur <- tesseract("frk")
+pngfile <- pdftools::pdf_convert(here::here("data/Pdf_1.pdf"), dpi = 600)
+```
+
+
+
+```{r}
+data_path <- here::here("data/")
+path <-  glue::glue(data_path, "Pdf_1_{picture}.png", 
+                    picture = as.character(c(1:35)))
+
+```
+
+
+```{r}
+text <- tesseract::ocr(path[4],engine = germanFraktur)
+```
+
